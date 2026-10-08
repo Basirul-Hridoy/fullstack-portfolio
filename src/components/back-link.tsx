@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
 
 type Props = {
@@ -9,14 +9,22 @@ type Props = {
   className?: string;
 };
 
-export default function BackLink({ fallbackHref, children, className = "" }: Props) {
+export default function BackLink({
+  fallbackHref,
+  children,
+  className = "",
+}: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const goBack = () => {
-    if (window.history.length > 1) {
-      router.back();
+    const from = searchParams.get("from");
+
+    if (from) {
+      router.push(`/#${from}`);
       return;
     }
+
     router.push(fallbackHref);
   };
 

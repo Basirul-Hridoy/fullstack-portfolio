@@ -1,6 +1,6 @@
 import { CaseStudy } from "@/constant/case-studies";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaExternalLinkAlt,
   FaFacebookF,
@@ -28,8 +28,13 @@ const colorMap: Record<CaseStudy["visual"], string> = {
 const CaseStudyCard = ({ study }: { study: CaseStudy }) => {
   const Icon = iconMap[study.visual];
   return (
-    <Link href={`/case-studies/${study.id}`} className="group block overflow-hidden rounded-2xl border border-accent/25 bg-[#061224]/60 transition hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_22px_60px_rgba(0,132,255,.12)]">
-      <div className={`relative h-36 overflow-hidden bg-gradient-to-br ${colorMap[study.visual]}`}>
+    <Link
+      href={`/case-studies/${study.id}?from=case-studies`}
+      className="group block overflow-hidden rounded-2xl border border-accent/25 bg-[#061224]/60 transition hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_22px_60px_rgba(0,132,255,.12)]"
+    >
+      <div
+        className={`relative h-36 overflow-hidden bg-gradient-to-br ${colorMap[study.visual]}`}
+      >
         {study.cardImage ? (
           <Image
             src={study.cardImage}
@@ -37,7 +42,6 @@ const CaseStudyCard = ({ study }: { study: CaseStudy }) => {
             fill
             sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) 50vw, 33vw"
             className="object-cover transition duration-500 group-hover:scale-[1.03]"
-           
           />
         ) : (
           <div className="absolute inset-4 rounded-xl border border-white/10 bg-[#08111f]/80 p-3 shadow-2xl">
@@ -58,7 +62,9 @@ const CaseStudyCard = ({ study }: { study: CaseStudy }) => {
             </div>
           </div>
         )}
-        {study.cardImage && <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />}
+        {study.cardImage && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+        )}
       </div>
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
