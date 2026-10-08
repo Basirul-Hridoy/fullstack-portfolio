@@ -29,7 +29,7 @@ const CaseStudyCard = ({ study }: { study: CaseStudy }) => {
   const Icon = iconMap[study.visual];
   return (
     <Link
-      href={`/case-studies/${study.id}?from=case-studies`}
+      href={`/case-studies/${study.id}`}
       className="group block overflow-hidden rounded-2xl border border-accent/25 bg-[#061224]/60 transition hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_22px_60px_rgba(0,132,255,.12)]"
     >
       <div

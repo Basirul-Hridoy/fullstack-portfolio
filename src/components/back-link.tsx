@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 type Props = {
@@ -15,16 +15,26 @@ export default function BackLink({
   className = "",
 }: Props) {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const goBack = () => {
-    const from = searchParams.get("from");
-
-    if (from) {
-      router.push(`/#${from}`);
+    // Return to the correct homepage section based on the current detail page.
+    if (pathname.startsWith("/case-studies")) {
+      router.push("/#case-studies");
       return;
     }
 
+    if (pathname.startsWith("/reviews")) {
+      router.push("/#reviews");
+      return;
+    }
+
+    if (pathname.startsWith("/certificates")) {
+      router.push("/#certificates");
+      return;
+    }
+
+    // Fallback for any other detail page.
     router.push(fallbackHref);
   };
 
